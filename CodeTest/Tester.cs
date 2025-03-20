@@ -15,7 +15,7 @@ namespace CodeTest
         /// <returns>bool</returns>
         public static bool IsPalindrome(string input)
         {
-            return false;
+            return input.SequenceEqual(input.Reverse());
         }
 
         /// <summary>
@@ -26,7 +26,17 @@ namespace CodeTest
         public static Dictionary<char, int> CharacterCount(string inpput)
         {
             Dictionary<char, int> output = new Dictionary<char, int>();
-
+            foreach (char c in inpput)
+            {
+                if (output.ContainsKey(c))
+                {
+                    output[c]++;
+                }
+                else
+                {
+                    output.Add(c, 1);
+                }
+            }
             return output;
         }
 
@@ -39,7 +49,7 @@ namespace CodeTest
         /// <returns>an array of integers</returns>
         public static int[] GetMatches(int[] input1, int[] input2)
         {
-            int[] output =  new int[0];            
+            int[] output =  input1.Intersect(input2).ToArray();          
 
             return output;
         }
@@ -53,7 +63,7 @@ namespace CodeTest
         /// <returns>an array of integers</returns>
         public static int[] GetDiff(int[] input1, int[] input2)
         {
-            int[] output = new int[0];
+            int[] output = input1.Except(input2).Union(input2.Except(input1)).ToArray();
 
             return output;
         }
